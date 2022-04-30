@@ -1,4 +1,12 @@
 import argparse
+import cv2
+
+def cvReadImage(input):
+	return cv2.imread(str(input.name))
+
+def cvShowImage(image):
+	cv2.imshow('image', image)
+	cv2.waitKey(0)
 
 def get_arg():
 	parser = argparse.ArgumentParser()
@@ -10,5 +18,6 @@ def main():
 
 if __name__ == '__main__':
 	args = get_arg()
-	print(args.input)
+	image = cvReadImage(args.input)
+	cvShowImage(image)
 	main()
