@@ -7,6 +7,9 @@ def cvReadImage(input):
 def cvCvtToGray(image):
 	return cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
+def cvToEdgeImage(image_gray):
+	return cv2.Canny(image_gray, 150, 300, L2gradient=True)
+
 def cvShowImage(image):
 	cv2.imshow('image', image)
 	cv2.waitKey(0)
@@ -22,6 +25,7 @@ def main():
 if __name__ == '__main__':
 	args = get_arg()
 	image = cvReadImage(args.input)
-	image_out = cvCvtToGray(image)
+	image_gray = cvCvtToGray(image)
+	image_out = cvToEdgeImage(image_gray)
 	cvShowImage(image_out)
 	main()
