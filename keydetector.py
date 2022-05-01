@@ -26,6 +26,7 @@ def cvShowImage(image):
 def get_arg():
 	parser = argparse.ArgumentParser()
 	parser.add_argument('-i','--input', required=True, type=argparse.FileType('rb'))
+	parser.add_argument('-v', '--view', action='store_true')
 	return parser.parse_args()
 
 def main():
@@ -36,5 +37,7 @@ if __name__ == '__main__':
 	image = cvReadImage(args.input)
 	image_gray = cvCvtToGray(image)
 	image_out = cvToEdgeImage(image_gray)
+	houghLines = cvHoughLines(image_out)
+	if args.view:
 		cvShowImage(image_out)
 	main()
