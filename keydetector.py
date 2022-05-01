@@ -5,6 +5,9 @@ import cv2
 def cvReadImage(input):
 	return cv2.imread(str(input.name))
 
+def cvWriteImage(filename, input):
+	cv2.imwrite(filename, input)
+
 def cvCvtToGray(image):
 	return cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
 
@@ -37,6 +40,7 @@ if __name__ == '__main__':
 	image = cvReadImage(args.input)
 	image_gray = cvCvtToGray(image)
 	image_out = cvToEdgeImage(image_gray)
+	cvWriteImage(str(args.input.name)+"_edge.jpg", image_out)
 	houghLines = cvHoughLines(image_out)
 	if args.view:
 		cvShowImage(image_out)
