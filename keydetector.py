@@ -22,6 +22,14 @@ def cvHoughLines(image_edge):
 		print(len(lines))
 	return lines
 
+def cvHoughLinesP(image_edge):
+	lines = cv2.HoughLinesP(image_edge, rho=1, theta=np.pi/360, threshold=80, minLineLength=100, maxLineGap=5)
+	if lines is None:
+		print("None")
+	else:
+		print(len(lines))
+	return lines
+
 def cvShowImage(image):
 	cv2.imshow('image', image)
 	cv2.waitKey(0)
@@ -41,7 +49,7 @@ if __name__ == '__main__':
 	image_gray = cvCvtToGray(image)
 	image_out = cvToEdgeImage(image_gray)
 	cvWriteImage(str(args.input.name)+"_edge.jpg", image_out)
-	houghLines = cvHoughLines(image_out)
+	houghLines = cvHoughLinesP(image_out)
 	if args.view:
 		cvShowImage(image_out)
 	main()
