@@ -1,4 +1,5 @@
 import argparse
+import numpy as np
 import cv2
 
 def cvReadImage(input):
@@ -9,6 +10,14 @@ def cvCvtToGray(image):
 
 def cvToEdgeImage(image_gray):
 	return cv2.Canny(image_gray, 150, 300, L2gradient=True)
+
+def cvHoughLines(image_edge):
+	lines = cv2.HoughLines(image_edge, 1, np.pi / 180, 100)
+	if lines is None:
+		print("None")
+	else:
+		print(len(lines))
+	return lines
 
 def cvShowImage(image):
 	cv2.imshow('image', image)
@@ -27,5 +36,5 @@ if __name__ == '__main__':
 	image = cvReadImage(args.input)
 	image_gray = cvCvtToGray(image)
 	image_out = cvToEdgeImage(image_gray)
-	cvShowImage(image_out)
+		cvShowImage(image_out)
 	main()
